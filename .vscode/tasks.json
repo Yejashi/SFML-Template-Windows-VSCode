@@ -1,0 +1,53 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "stage1",
+            "type": "shell",
+            "group": "build",
+            "command": "g++",
+            "args": [
+				"-c", 
+				"-g",
+				"${workspaceRoot}\\src\\main.cpp", 
+				"-Iinclude",
+				"-o",
+				"obj\\main.o"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "final",
+            "type": "shell",
+            "group": "build",
+			"dependsOn":["stage1"],
+            "command": "g++",
+            "args": [
+				"obj\\main.o",
+				"-g",
+				"-o",
+				"bin\\main",
+				"-Llib",
+				"-lsfml-graphics",
+				"-lsfml-window",
+				"-lsfml-system"
+
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+        //"showReuseMessage": true
+    }
+}
